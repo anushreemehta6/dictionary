@@ -5,19 +5,25 @@ body{
 }
 .main{
     background-color: #716B70;
-    width: 30vw;
-    height: 30vh;
+    min-width: 30vw;
+    max-width: fit-content;
+    /* height: 30vh; */
+    min-height: 30vh;
+    max-height: fit-content;
     border-radius: 30px;
-    padding: 50px;
-    margin: 50px;
+    padding: 20px;
+    margin: 20px;
+    
+    
     text-align: center;
-    margin-left: 450px;
-    margin-top: 200px;
+
+     
      
 }
 .heading{
     font-size: xx-large;
     font-weight: 600;
+    margin: 10px;
 }
 .main-2{
     display: flex;
@@ -34,4 +40,16 @@ button{
     border-radius: 5px;
     background-color: antiquewhite;
     font-size: larger;
+}
+
+.word-info{
+    color: white;
+    min-width: 25vw;
+    max-width: fit-content;
+}
+
+.ans{
+    color: black;
+    font-size: larger;
+    font-weight: normal;
 }
