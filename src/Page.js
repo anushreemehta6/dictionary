@@ -3,15 +3,16 @@ import axios from "axios";
 import "./Page.css";
 
 function Page() {
-  let [words, setword] = useState("");
-  let [x, setx] = useState(null);
+  let [word, setword] = useState("");
+  let [data, setdata] = useState(null);
 
   async function getWord() {
     try {
-      const respons = await axios.get(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/${words}`
+      const response = await axios.get(
+        // `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
       );
-      setx(respons.data);
+      setdata(response.data[0]);
     } catch (error) {
       alert("word not found try again later!!");
     }
@@ -26,20 +27,23 @@ function Page() {
           type="text"
           placeholder="Enter word "
           onChange={(e) => setword(e.target.value)}
-          value={words}
+          value={word}
           defaultValue=""
         />
         <button onClick={getWord}>Search</button>
       </div>
-      {x && (
+      {data && (
         <div className="word-info">
-          <h2> word - {x.word}</h2>
-          <br/>
-          <p> phonetic - {x.phonetic}</p>
-          <br />
-          {/* <p> part of speech - {x.meanings[0]}</p>    */}
-          <br />
-          {/* <p> meaning - {x.meanings.definitions.definition}</p> */}
+          <h2>Word: <font className="ans">{data.word} </font></h2>
+          <p>Phonetic: {data.phonetic}</p>
+          {data.meanings.map((meaning, index) => (
+            <div key={index}>
+              <p>Part of Speech:  <font className="ans">{meaning.partOfSpeech}</font></p>
+              {meaning.definitions.map((definition, defIndex) => (
+                <p key={defIndex}>Definition: <font className="ans"> {definition.definition} </font></p>
+              ))}
+            </div>
+          ))}
         </div>
       )}
     </div>
